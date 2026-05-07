@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../auth/authentication_bloc.dart';
+import '../auth/authentication_event.dart';
+
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
+  static const Color purple = Color(0xFF6D5A9C);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: const Icon(Icons.menu),
+        title: const Text('Profile'),
+        centerTitle: true,
+        backgroundColor: const Color(0xFFFDF5FF),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 14),
+            child: Icon(Icons.account_circle_outlined),
+          ),
+        ],
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 28),
+          child: SizedBox(
+            width: double.infinity,
+            height: 42,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: purple,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24),
+                ),
+              ),
+              onPressed: () {
+                context.read<AuthenticationBloc>().add(LogoutRequested());
+              },
+              child: const Text('Logout'),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
